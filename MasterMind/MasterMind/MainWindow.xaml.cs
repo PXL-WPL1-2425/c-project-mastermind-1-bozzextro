@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,9 +21,34 @@ namespace MasterMind
     /// </summary>
     public partial class MainWindow : Window
     {
+        string[] kleuren = {"Rood", "Geel", "Oranje", "Wit", "Groen", "Blauw"};
+        string[] code;
+
         public MainWindow()
         {
             InitializeComponent();
+            GenereerCode();
+        }
+        public void GenereerCode()
+        {
+            code = new string[4];
+            Random random = new Random();
+            int i = 0;
+            List<int> alGebruikteRngs = new List<int>();
+
+            while (i<4) 
+            {
+                int rng = random.Next(0, kleuren.Length);
+                
+                if (!alGebruikteRngs.Contains(rng))
+                {
+                    code[i] = kleuren[rng];
+                    alGebruikteRngs.Add(rng);
+                    i++;
+                }
+            }
+           
+            this.Title = $"MasterMind({string.Join(",", code)})";
         }
     }
 }
