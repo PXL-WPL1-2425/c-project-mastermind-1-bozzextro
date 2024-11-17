@@ -108,5 +108,52 @@ namespace MasterMind
                 Lbl4.Background = kleurenDictionary[geselecteerdeKleur];
             }
         }
+
+        private bool CheckCboFilled()
+        {
+            return Cbo1.SelectedIndex != -1 && Cbo2.SelectedIndex != -1 && Cbo3.SelectedIndex != -1 && Cbo4.SelectedIndex != -1;
+        }
+        private void BtnCheck_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckCboFilled())
+            {
+                if (code.Contains(Cbo1.SelectedItem.ToString()))
+                {
+                    Lbl1.BorderBrush = new SolidColorBrush(Colors.Wheat);
+                    if (code[0].Equals(Cbo1.SelectedItem.ToString()))
+                    {
+                        Lbl1.BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                    }
+                }
+                if (code.Contains(Cbo2.SelectedItem.ToString()))
+                {
+                    Lbl2.BorderBrush = new SolidColorBrush(Colors.Wheat);
+                    if (code[1].Equals(Cbo2.SelectedItem.ToString()))
+                    {
+                        Lbl2.BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                    }
+                }
+                if (code.Contains(Cbo3.SelectedItem.ToString()))
+                {
+                    Lbl3.BorderBrush = new SolidColorBrush(Colors.Wheat);
+                    if (code[2].Equals(Cbo3.SelectedItem.ToString()))
+                    {
+                        Lbl3.BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                    }
+                }
+                if (code.Contains(Cbo4.SelectedItem.ToString()))
+                {
+                    Lbl4.BorderBrush = new SolidColorBrush(Colors.Wheat);
+                    if (code[3].Equals(Cbo4.SelectedItem.ToString()))
+                    {
+                        Lbl4.BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Gelieve voor elke combobox een selectie te maken.");
+            }
+        }
     }
 }
