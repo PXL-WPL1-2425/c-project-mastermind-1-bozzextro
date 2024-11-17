@@ -28,6 +28,7 @@ namespace MasterMind
         {
             InitializeComponent();
             GenereerCode();
+            VulCbo();
         }
         public void GenereerCode()
         {
@@ -49,6 +50,18 @@ namespace MasterMind
             }
            
             this.Title = $"MasterMind({string.Join(",", code)})";
+        }
+        public void VulCbo()
+        {
+            int i = 0;
+            while (i < kleuren.Length)
+            {
+                Cbo1.Items.Add(kleuren[i]);
+                Cbo2.Items.Add(kleuren[i]);
+                Cbo3.Items.Add(kleuren[i]);
+                Cbo4.Items.Add(kleuren[i]);
+                i++;
+            }
         }
     }
 }
