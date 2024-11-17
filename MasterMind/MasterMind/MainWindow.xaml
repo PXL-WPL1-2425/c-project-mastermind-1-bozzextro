@@ -19,44 +19,23 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <ComboBox Name="Cbo1"/>
-            <Ellipse Width="100" Height="100" 
-                 Fill="White" 
-                 Stroke="Black" 
-                 StrokeThickness="2" 
-                 HorizontalAlignment="Center" 
-                 VerticalAlignment="Center"
-                 Margin="0,10,0,0"/>
-        </StackPanel>
-        <StackPanel Grid.Column="1">
-            <ComboBox Name="Cbo2"/>
-            <Ellipse Width="100" Height="100" 
-                 Fill="White" 
-                 Stroke="Black" 
-                 StrokeThickness="2" 
-                 HorizontalAlignment="Center" 
-                 VerticalAlignment="Center"
-                 Margin="0,10,0,0"/>
-        </StackPanel>
-        <StackPanel Grid.Column="2">
-            <ComboBox Name="Cbo3"/>
-            <Ellipse Width="100" Height="100" 
-                 Fill="White" 
-                 Stroke="Black" 
-                 StrokeThickness="2" 
-                 HorizontalAlignment="Center" 
-                 VerticalAlignment="Center"
-                 Margin="0,10,0,0"/>
+            <ComboBox Name="Cbo1" SelectionChanged="Cbo1_SelectionChanged"/>
+            <Label Name="Lbl1" Height="80" Width="80" Margin="20" BorderBrush="Black" BorderThickness="1"/>
         </StackPanel>
         <StackPanel Grid.Column="3">
-            <ComboBox Name="Cbo4"/>
-            <Ellipse Width="100" Height="100" 
-                 Fill="White" 
-                 Stroke="Black" 
-                 StrokeThickness="2" 
-                 HorizontalAlignment="Center" 
-                 VerticalAlignment="Center"
-                 Margin="0,10,0,0"/>
+            <ComboBox Name="Cbo2" SelectionChanged="Cbo2_SelectionChanged"/>
+            <Label Name="Lbl2" Height="80" Width="80" Margin="20" BorderBrush="Black" BorderThickness="1"/>
+
+        </StackPanel>
+        <StackPanel Grid.Row="2">
+            <ComboBox Name="Cbo3" SelectionChanged="Cbo3_SelectionChanged"/>
+            <Label Name="Lbl3" Height="80" Width="80" Margin="20" BorderBrush="Black" BorderThickness="1"/>
+
+        </StackPanel>
+        <StackPanel Grid.Column="3" Grid.Row="2">
+            <ComboBox Name="Cbo4" SelectionChanged="Cbo4_SelectionChanged"/>
+            <Label Name="Lbl4" Height="80" Width="80" Margin="20" BorderBrush="Black" BorderThickness="1"/>
+
         </StackPanel>
         <Button Name="BtnCheck" Content="Check code" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="30" Width="120"/>
     </Grid>
