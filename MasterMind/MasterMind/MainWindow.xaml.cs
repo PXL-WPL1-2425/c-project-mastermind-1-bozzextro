@@ -304,10 +304,8 @@ namespace MasterMind
                 {
                     Close();
                 }
-                else if (result == MessageBoxResult.Yes)
-                {
-                    ResetGame();
-                }
+                ResetGame();
+
             }
         }
 
@@ -340,7 +338,18 @@ namespace MasterMind
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            var result = MessageBox.Show(
+                "Ben je zeker dat je de applicatie wilt sluiten?",
+                "Applicatie sluiten?",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+                );
 
+
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+            }             
         }
     }
 }
