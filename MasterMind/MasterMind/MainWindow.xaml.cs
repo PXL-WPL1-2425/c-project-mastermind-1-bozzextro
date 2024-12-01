@@ -28,6 +28,7 @@ namespace MasterMind
         string geselecteerdeKleur2;
         string geselecteerdeKleur3;
         string geselecteerdeKleur4;
+        int score = 100;
 
         SolidColorBrush brushCodeHistoriek1 = new SolidColorBrush(Colors.Black);
         SolidColorBrush brushCodeHistoriek2 = new SolidColorBrush(Colors.Black);
@@ -126,73 +127,98 @@ namespace MasterMind
         }
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
         {
+            int minPunten = 0;
             if (CheckCboFilled() && counter<10)
             {
                 if (code.Contains(Cbo1.SelectedItem.ToString()))
                 {
                     Lbl1.BorderBrush = new SolidColorBrush(Colors.Wheat);
                     brushCodeHistoriek1 = new SolidColorBrush(Colors.Wheat);
+                    minPunten++;
                     if (code[0].Equals(Cbo1.SelectedItem.ToString()))
                     {
                         Lbl1.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                         brushCodeHistoriek1 = new SolidColorBrush(Colors.DarkRed);
+                        minPunten--;
                     }
                 }
                 else
                 {
                     Lbl1.BorderBrush = new SolidColorBrush(Colors.Black);
                     brushCodeHistoriek1 = new SolidColorBrush(Colors.Black);
+                    minPunten += 2;
                 }
                 if (code.Contains(Cbo2.SelectedItem.ToString()))
                 {
                     Lbl2.BorderBrush = new SolidColorBrush(Colors.Wheat);
-                    brushCodeHistoriek2 = new SolidColorBrush(Colors.Wheat);    
+                    brushCodeHistoriek2 = new SolidColorBrush(Colors.Wheat);
+                    minPunten++;
+
                     if (code[1].Equals(Cbo2.SelectedItem.ToString()))
                     {
                         Lbl2.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                         brushCodeHistoriek2 = new SolidColorBrush(Colors.DarkRed);
+                        minPunten--;
+
                     }
                 }
                 else
                 {
                     Lbl2.BorderBrush = new SolidColorBrush(Colors.Black);
                     brushCodeHistoriek2 = new SolidColorBrush(Colors.Black);
+                    minPunten += 2;
+
                 }
                 if (code.Contains(Cbo3.SelectedItem.ToString()))
                 {
                     Lbl3.BorderBrush = new SolidColorBrush(Colors.Wheat);
                     brushCodeHistoriek3 = new SolidColorBrush(Colors.Wheat);
+                    minPunten++;
+
 
                     if (code[2].Equals(Cbo3.SelectedItem.ToString()))
                     {
                         Lbl3.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                         brushCodeHistoriek3 = new SolidColorBrush(Colors.DarkRed);
+                        minPunten--;
+
                     }
                 }
                 else
                 {
                     Lbl3.BorderBrush = new SolidColorBrush(Colors.Black);
                     brushCodeHistoriek3 = new SolidColorBrush(Colors.Black);
+                    minPunten += 2;
+
                 }
                 if (code.Contains(Cbo4.SelectedItem.ToString()))
                 {
                     Lbl4.BorderBrush = new SolidColorBrush(Colors.Wheat);
                     brushCodeHistoriek4 = new SolidColorBrush(Colors.Wheat);
+                    minPunten++;
+
 
                     if (code[3].Equals(Cbo4.SelectedItem.ToString()))
                     {
                         Lbl4.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                         brushCodeHistoriek4 = new SolidColorBrush(Colors.DarkRed);
+                        minPunten--;
+
                     }
                 }
                 else
                 {
                     Lbl4.BorderBrush = new SolidColorBrush(Colors.Black);
                     brushCodeHistoriek4 = new SolidColorBrush(Colors.Black);
+                    minPunten += 2;
+
                 }
                 counter++;
+                score = score - minPunten;
                 LblPogingen.Content = $"Poging {counter}/10";
                 FoutievePogingenToevoegen();
+                LblScore.Content = $"Score: {score}";
+
             }
             else if(counter<10)
             {
@@ -229,5 +255,6 @@ namespace MasterMind
             
             StackPanelHistorie.Children.Add(nieuwePoging);
         }
+
     }
 }
