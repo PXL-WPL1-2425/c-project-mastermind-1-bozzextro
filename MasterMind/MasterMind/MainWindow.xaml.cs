@@ -23,6 +23,7 @@ namespace MasterMind
     {
         string[] kleurenArray = {"Rood", "Geel", "Oranje", "Wit", "Groen", "Blauw"};
         string[] code;
+        int counter = 0;
         Dictionary<string, SolidColorBrush> kleurenDictionary = new Dictionary<string, SolidColorBrush> { 
             { "Rood", new SolidColorBrush(Colors.Red) }, 
             { "Geel", new SolidColorBrush(Colors.Yellow) },
@@ -115,7 +116,7 @@ namespace MasterMind
         }
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
         {
-            if (CheckCboFilled())
+            if (CheckCboFilled() && counter<10)
             {
                 if (code.Contains(Cbo1.SelectedItem.ToString()))
                 {
@@ -149,10 +150,17 @@ namespace MasterMind
                         Lbl4.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                     }
                 }
+                counter++;
+                LblPogingen.Content = $"Poging {counter}/10";
+            }
+            else if(counter<10)
+            {
+                MessageBox.Show("Gelieve voor elke combobox een selectie te maken.");
             }
             else
             {
-                MessageBox.Show("Gelieve voor elke combobox een selectie te maken.");
+                MessageBox.Show("Geen pogingen meer.");
+                //Tijdelijke messagebox, zal eleganter opgelost worden in latere versies.
             }
         }
     }
