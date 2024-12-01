@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MasterMind"
         mc:Ignorable="d"
-        Title="MasterMind" Height="450" Width="800" Closing="Window_Closing">
-    <Grid>
+        Title="MasterMind" Height="800" Width="800" Closing="Window_Closing">
+    <Grid Background="AliceBlue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -27,24 +27,25 @@
             <Label Name="Lbl2" Height="80" Width="80" Margin="20" BorderBrush="Black" BorderThickness="3"/>
 
         </StackPanel>
-        <StackPanel Grid.Row="2">
+        <StackPanel Grid.Row="1">
             <ComboBox Name="Cbo3" SelectionChanged="Cbo3_SelectionChanged"/>
             <Label Name="Lbl3" Height="80" Width="80" Margin="20" BorderBrush="Black" BorderThickness="3"/>
 
         </StackPanel>
-        <StackPanel Grid.Column="3" Grid.Row="2">
+        <StackPanel Grid.Column="3" Grid.Row="1">
             <ComboBox Name="Cbo4" SelectionChanged="Cbo4_SelectionChanged"/>
             <Label Name="Lbl4" Height="80" Width="80" Margin="20" BorderBrush="Black" BorderThickness="3"/>
 
         </StackPanel>
-        <StackPanel Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button Name="BtnCheck" Click="BtnCheck_Click" Content="Check code" Height="30" Width="120"/>
+        <StackPanel Grid.ColumnSpan="2" Grid.Column="1" Grid.RowSpan="3" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button Name="BtnCheck" Click="BtnCheck_Click" Content="Check code" Height="30" Width="120" Background="Green"/>
             <Label Name="LblPogingen" Content="Poging 0/10" Width="120" Height="35" FontSize="16"/>
             <Label Name="LblScore" Content="Score: 100" Width="120" Height="35" FontSize="16"/>
+            <StackPanel x:Name="StackPanelHistorie" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
+
+            </StackPanel>
         </StackPanel>
-        <StackPanel x:Name="StackPanelHistorie" Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top">
-            
-        </StackPanel>
+
 
 
     </Grid>
