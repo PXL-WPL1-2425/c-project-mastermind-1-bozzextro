@@ -24,6 +24,16 @@ namespace MasterMind
         string[] kleurenArray = {"Rood", "Geel", "Oranje", "Wit", "Groen", "Blauw"};
         string[] code;
         int counter = 0;
+        string geselecteerdeKleur1;
+        string geselecteerdeKleur2;
+        string geselecteerdeKleur3;
+        string geselecteerdeKleur4;
+
+        SolidColorBrush brushCodeHistoriek1 = new SolidColorBrush(Colors.Black);
+        SolidColorBrush brushCodeHistoriek2 = new SolidColorBrush(Colors.Black);
+        SolidColorBrush brushCodeHistoriek3 = new SolidColorBrush(Colors.Black);
+        SolidColorBrush brushCodeHistoriek4 = new SolidColorBrush(Colors.Black);
+
         Dictionary<string, SolidColorBrush> kleurenDictionary = new Dictionary<string, SolidColorBrush> { 
             { "Rood", new SolidColorBrush(Colors.Red) }, 
             { "Geel", new SolidColorBrush(Colors.Yellow) },
@@ -78,8 +88,8 @@ namespace MasterMind
         {
             if(Cbo1.SelectedIndex != -1)
             {
-                string geselecteerdeKleur = Cbo1.SelectedItem.ToString();
-                Lbl1.Background = kleurenDictionary[geselecteerdeKleur];
+                geselecteerdeKleur1 = Cbo1.SelectedItem.ToString();
+                Lbl1.Background = kleurenDictionary[geselecteerdeKleur1];
             }
         }
 
@@ -87,8 +97,8 @@ namespace MasterMind
         {
             if (Cbo2.SelectedIndex != -1)
             {
-                string geselecteerdeKleur = Cbo2.SelectedItem.ToString();
-                Lbl2.Background = kleurenDictionary[geselecteerdeKleur];
+                geselecteerdeKleur2 = Cbo2.SelectedItem.ToString();
+                Lbl2.Background = kleurenDictionary[geselecteerdeKleur2];
             }
         }
 
@@ -96,8 +106,8 @@ namespace MasterMind
         {
             if (Cbo3.SelectedIndex != -1)
             {
-                string geselecteerdeKleur = Cbo3.SelectedItem.ToString();
-                Lbl3.Background = kleurenDictionary[geselecteerdeKleur];
+                geselecteerdeKleur3 = Cbo3.SelectedItem.ToString();
+                Lbl3.Background = kleurenDictionary[geselecteerdeKleur3];
             }
         }
 
@@ -105,8 +115,8 @@ namespace MasterMind
         {
             if (Cbo4.SelectedIndex != -1)
             {
-                string geselecteerdeKleur = Cbo4.SelectedItem.ToString();
-                Lbl4.Background = kleurenDictionary[geselecteerdeKleur];
+                geselecteerdeKleur4 = Cbo4.SelectedItem.ToString();
+                Lbl4.Background = kleurenDictionary[geselecteerdeKleur4];
             }
         }
 
@@ -121,37 +131,68 @@ namespace MasterMind
                 if (code.Contains(Cbo1.SelectedItem.ToString()))
                 {
                     Lbl1.BorderBrush = new SolidColorBrush(Colors.Wheat);
+                    brushCodeHistoriek1 = new SolidColorBrush(Colors.Wheat);
                     if (code[0].Equals(Cbo1.SelectedItem.ToString()))
                     {
                         Lbl1.BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                        brushCodeHistoriek1 = new SolidColorBrush(Colors.DarkRed);
                     }
+                }
+                else
+                {
+                    Lbl1.BorderBrush = new SolidColorBrush(Colors.Black);
+                    brushCodeHistoriek1 = new SolidColorBrush(Colors.Black);
                 }
                 if (code.Contains(Cbo2.SelectedItem.ToString()))
                 {
                     Lbl2.BorderBrush = new SolidColorBrush(Colors.Wheat);
+                    brushCodeHistoriek2 = new SolidColorBrush(Colors.Wheat);    
                     if (code[1].Equals(Cbo2.SelectedItem.ToString()))
                     {
                         Lbl2.BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                        brushCodeHistoriek2 = new SolidColorBrush(Colors.DarkRed);
                     }
+                }
+                else
+                {
+                    Lbl2.BorderBrush = new SolidColorBrush(Colors.Black);
+                    brushCodeHistoriek2 = new SolidColorBrush(Colors.Black);
                 }
                 if (code.Contains(Cbo3.SelectedItem.ToString()))
                 {
                     Lbl3.BorderBrush = new SolidColorBrush(Colors.Wheat);
+                    brushCodeHistoriek3 = new SolidColorBrush(Colors.Wheat);
+
                     if (code[2].Equals(Cbo3.SelectedItem.ToString()))
                     {
                         Lbl3.BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                        brushCodeHistoriek3 = new SolidColorBrush(Colors.DarkRed);
                     }
+                }
+                else
+                {
+                    Lbl3.BorderBrush = new SolidColorBrush(Colors.Black);
+                    brushCodeHistoriek3 = new SolidColorBrush(Colors.Black);
                 }
                 if (code.Contains(Cbo4.SelectedItem.ToString()))
                 {
                     Lbl4.BorderBrush = new SolidColorBrush(Colors.Wheat);
+                    brushCodeHistoriek4 = new SolidColorBrush(Colors.Wheat);
+
                     if (code[3].Equals(Cbo4.SelectedItem.ToString()))
                     {
                         Lbl4.BorderBrush = new SolidColorBrush(Colors.DarkRed);
+                        brushCodeHistoriek4 = new SolidColorBrush(Colors.DarkRed);
                     }
+                }
+                else
+                {
+                    Lbl4.BorderBrush = new SolidColorBrush(Colors.Black);
+                    brushCodeHistoriek4 = new SolidColorBrush(Colors.Black);
                 }
                 counter++;
                 LblPogingen.Content = $"Poging {counter}/10";
+                FoutievePogingenToevoegen();
             }
             else if(counter<10)
             {
@@ -162,6 +203,31 @@ namespace MasterMind
                 MessageBox.Show("Geen pogingen meer.");
                 //Tijdelijke messagebox, zal eleganter opgelost worden in latere versies.
             }
+        }
+
+        private void FoutievePogingenToevoegen()
+        {
+            StackPanel nieuwePoging = new StackPanel { Orientation = Orientation.Horizontal };
+
+            string[] nieuwstePogingCode = { geselecteerdeKleur1, geselecteerdeKleur2, geselecteerdeKleur3, geselecteerdeKleur4};
+            SolidColorBrush[] borderKLeuren = { brushCodeHistoriek1, brushCodeHistoriek2, brushCodeHistoriek3, brushCodeHistoriek4 };
+            int i = 0;
+            foreach (var kleur in nieuwstePogingCode)
+            {
+                Rectangle rect = new Rectangle
+                {
+                    Width = 50,
+                    Height = 50,
+                    Fill = kleurenDictionary[kleur],
+                    Stroke = borderKLeuren[i],
+                    StrokeThickness = 2,             
+                    Margin = new Thickness(5)
+                };
+                nieuwePoging.Children.Add(rect);
+                i++;
+            }
+            
+            StackPanelHistorie.Children.Add(nieuwePoging);
         }
     }
 }
