@@ -23,12 +23,17 @@ namespace MasterMind
     {
         string[] kleurenArray = {"Rood", "Geel", "Oranje", "Wit", "Groen", "Blauw"};
         string[] code;
-        int counter = 0;
+
+        int pogingenCounter = 0;
+
         string geselecteerdeKleur1;
         string geselecteerdeKleur2;
         string geselecteerdeKleur3;
         string geselecteerdeKleur4;
+
         int score = 100;
+        int aantalCorrecteKleuren = 0;
+
 
         SolidColorBrush brushCodeHistoriek1 = new SolidColorBrush(Colors.Black);
         SolidColorBrush brushCodeHistoriek2 = new SolidColorBrush(Colors.Black);
@@ -128,7 +133,7 @@ namespace MasterMind
         private void BtnCheck_Click(object sender, RoutedEventArgs e)
         {
             int minPunten = 0;
-            if (CheckCboFilled() && counter<10)
+            if (CheckCboFilled() && pogingenCounter<10)
             {
                 if (code.Contains(Cbo1.SelectedItem.ToString()))
                 {
@@ -140,6 +145,7 @@ namespace MasterMind
                         Lbl1.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                         brushCodeHistoriek1 = new SolidColorBrush(Colors.DarkRed);
                         minPunten--;
+                        aantalCorrecteKleuren++;
                     }
                 }
                 else
@@ -153,12 +159,14 @@ namespace MasterMind
                     Lbl2.BorderBrush = new SolidColorBrush(Colors.Wheat);
                     brushCodeHistoriek2 = new SolidColorBrush(Colors.Wheat);
                     minPunten++;
+                    
 
                     if (code[1].Equals(Cbo2.SelectedItem.ToString()))
                     {
                         Lbl2.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                         brushCodeHistoriek2 = new SolidColorBrush(Colors.DarkRed);
                         minPunten--;
+                        aantalCorrecteKleuren++;
 
                     }
                 }
@@ -181,6 +189,7 @@ namespace MasterMind
                         Lbl3.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                         brushCodeHistoriek3 = new SolidColorBrush(Colors.DarkRed);
                         minPunten--;
+                        aantalCorrecteKleuren++;
 
                     }
                 }
@@ -203,6 +212,7 @@ namespace MasterMind
                         Lbl4.BorderBrush = new SolidColorBrush(Colors.DarkRed);
                         brushCodeHistoriek4 = new SolidColorBrush(Colors.DarkRed);
                         minPunten--;
+                        aantalCorrecteKleuren++;
 
                     }
                 }
@@ -213,14 +223,15 @@ namespace MasterMind
                     minPunten += 2;
 
                 }
-                counter++;
+                pogingenCounter++;
                 score = score - minPunten;
-                LblPogingen.Content = $"Poging {counter}/10";
+                LblPogingen.Content = $"Poging {pogingenCounter}/10";
                 FoutievePogingenToevoegen();
                 LblScore.Content = $"Score: {score}";
-
+                CheckCodeEnPogingen();
+                aantalCorrecteKleuren = 0;
             }
-            else if(counter<10)
+            else if(pogingenCounter<10)
             {
                 MessageBox.Show("Gelieve voor elke combobox een selectie te maken.");
             }
@@ -256,5 +267,80 @@ namespace MasterMind
             StackPanelHistorie.Children.Add(nieuwePoging);
         }
 
+        private void CheckCodeEnPogingen()
+        {
+            if (aantalCorrecteKleuren == 4)
+            {
+                var result = MessageBox.Show(
+                "Wilt u nog eens spelen?",
+                "Proficiat, u heeft de code gekraakt!",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+                );
+
+
+                if (result == MessageBoxResult.No)
+                {
+                    Close();
+                }
+                else if (result == MessageBoxResult.Yes)
+                {
+                    ResetGame();
+                }
+            } 
+
+            else if (pogingenCounter == 10)
+            {
+                string codeNaarCommaSepString = string.Join(", ", code);
+                var result = MessageBox.Show(
+                $"De code was : {codeNaarCommaSepString} \n Wilt u nog eens spelen? ",
+                "U heeft geen pogingen meer!",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question
+                );
+
+
+                if (result == MessageBoxResult.No)
+                {
+                    Close();
+                }
+                else if (result == MessageBoxResult.Yes)
+                {
+                    ResetGame();
+                }
+            }
+        }
+
+        private void ResetGame()
+        {
+            GenereerCode();
+            Cbo1.SelectedIndex = -1;
+            Cbo2.SelectedIndex = -1;
+            Cbo3.SelectedIndex = -1;
+            Cbo4.SelectedIndex = -1;
+
+            Lbl1.Background = new SolidColorBrush(Colors.White);
+            Lbl2.Background = new SolidColorBrush(Colors.White);
+            Lbl3.Background = new SolidColorBrush(Colors.White);
+            Lbl4.Background = new SolidColorBrush(Colors.White);
+
+            Lbl1.BorderBrush = new SolidColorBrush(Colors.White);
+            Lbl2.BorderBrush = new SolidColorBrush(Colors.White);
+            Lbl3.BorderBrush = new SolidColorBrush(Colors.White);
+            Lbl4.BorderBrush = new SolidColorBrush(Colors.White);
+
+            StackPanelHistorie.Children.Clear();
+            score = 100;
+            pogingenCounter = 0;
+
+            LblPogingen.Content = "Poging 0/10";
+            LblScore.Content = "Score: 100";
+
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
     }
 }
